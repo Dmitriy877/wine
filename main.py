@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 import os
 
 
-def get_years_since_foundation(date_of_foundation: int) -> int:
+def get_years_since_foundation(date_of_foundation: datetime) -> int:
     days_since_foundation = (datetime.date.today() - date_of_foundation).days
     days_in_year = 365
     years_since_foundation = int(days_since_foundation/days_in_year)
@@ -51,13 +51,14 @@ def get_wines_from_excel(excel_filename: str) -> dict:
 
     wines = collections.defaultdict(list)
     [wines[wine['Категория']].append(wine) for wine in wines_from_excel]
-    wines_sorted = dict(sorted(wines.items()))
-    return wines_sorted
+    sorted_wines = dict(sorted(wines.items()))
+    return sorted_wines
 
 
 def main():
     load_dotenv()
     date_of_foundation = datetime.date(year=1920, month=1, day=1)
+    
     excel_filename = os.environ["EXCEL_FILENAME"]
     years_since_foundation = get_years_since_foundation(date_of_foundation)
 

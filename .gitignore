@@ -1,5 +1,6 @@
 env/
 .vscode/
+index.html
 test.py
 *.env
 *.xlsx
